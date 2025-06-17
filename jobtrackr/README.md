@@ -41,7 +41,7 @@ jobtrackr
 
 1. **Clone the Repository**:
    ```
-   git clone <repository-url>
+   git clone <repository-url(will be provided later)>
    cd jobtrackr
    ```
 
