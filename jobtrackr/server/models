@@ -1,0 +1,61 @@
+// This file contains Mongoose models for MongoDB collections.
+
+const mongoose = require('mongoose');
+
+// User model
+const userSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+});
+
+const User = mongoose.model('User', userSchema);
+
+// JobApplication model
+const jobApplicationSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    companyName: {
+        type: String,
+        required: true
+    },
+    jobTitle: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: String,
+        enum: ['Applied', 'Interviewing', 'Offer', 'Rejected'],
+        default: 'Applied'
+    },
+    dateApplied: {
+        type: Date,
+        default: Date.now
+    },
+    AI_suggestions: {
+        type: [String]
+    },
+    resume_file_url: {
+        type: String
+    }
+});
+
+const JobApplication = mongoose.model('JobApplication', jobApplicationSchema);
+
+module.exports = {
+    User,
+    JobApplication
+};
